@@ -1,0 +1,738 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Gym Scheduler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <div id="app">
+
+        <!-- AUTH -->
+        <section id="auth-section" class="auth-wrap">
+            <div class="auth-right">
+                <div class="auth-form-wrap">
+
+                    <div class="auth-brand">
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                            <rect width="30" height="30" rx="8" fill="url(#lg1)" />
+                            <path d="M7 15h3l2-6 3 11 2-7 2 4h4" stroke="white" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <defs>
+                                <linearGradient id="lg1" x1="0" y1="0" x2="30" y2="30">
+                                    <stop offset="0%" stop-color="#7c6af7" />
+                                    <stop offset="100%" stop-color="#a78bfa" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>Campus Gym Scheduler</span>
+                    </div>
+
+                    <!-- Login -->
+                    <form id="login-form" class="auth-form">
+                        <div class="form-eyebrow">Welcome back</div>
+                        <h2 class="form-title">Sign in</h2>
+
+                        <div class="field">
+                            <label for="login-username">Username</label>
+                            <div class="input-wrap">
+                                <svg class="input-icon" viewBox="0 0 20 20" fill="none">
+                                    <circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.5" />
+                                    <path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor"
+                                        stroke-width="1.5" stroke-linecap="round" />
+                                </svg>
+                                <input type="text" id="login-username" placeholder="your_username" required
+                                    autocomplete="username">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="login-password">Password</label>
+                            <div class="input-wrap">
+                                <svg class="input-icon" viewBox="0 0 20 20" fill="none">
+                                    <rect x="4" y="9" width="12" height="9" rx="2" stroke="currentColor"
+                                        stroke-width="1.5" />
+                                    <path d="M7 9V6a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                </svg>
+                                <input type="password" id="login-password" placeholder="password" required
+                                    autocomplete="current-password">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-cta">
+                            <span>Sign in</span>
+                            <svg viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+
+                        <p class="switch-text">No account? <a href="#" id="show-register">Create one</a></p>
+                    </form>
+
+                    <!-- Register -->
+                    <form id="register-form" class="auth-form hidden">
+                        <div class="form-eyebrow">Get started</div>
+                        <h2 class="form-title">Create account</h2>
+
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="reg-username">Username</label>
+                                <div class="input-wrap">
+                                    <svg class="input-icon" viewBox="0 0 20 20" fill="none">
+                                        <circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.5" />
+                                        <path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor"
+                                            stroke-width="1.5" stroke-linecap="round" />
+                                    </svg>
+                                    <input type="text" id="reg-username" placeholder="cool_username" required
+                                        minlength="3">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="reg-role">Role</label>
+                                <div class="input-wrap select-wrap">
+                                    <svg class="input-icon" viewBox="0 0 20 20" fill="none">
+                                        <path
+                                            d="M10 2l2.4 4.8 5.3.8-3.85 3.75.91 5.3L10 14.25l-4.76 2.43.91-5.3L2.3 7.6l5.3-.8L10 2z"
+                                            stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                                    </svg>
+                                    <select id="reg-role" required>
+                                        <option value="student">Student</option>
+                                        <option value="trainer">Trainer</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="reg-email">Email</label>
+                            <div class="input-wrap">
+                                <svg class="input-icon" viewBox="0 0 20 20" fill="none">
+                                    <rect x="2" y="5" width="16" height="12" rx="2" stroke="currentColor"
+                                        stroke-width="1.5" />
+                                    <path d="M2 8l8 5 8-5" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                </svg>
+                                <input type="email" id="reg-email" placeholder="you@gmail.com" required>
+                            </div>
+                            <span class="field-hint">Students: @gmail.com &middot; Trainers: @Campus Gym
+                                Scheduler.com</span>
+                        </div>
+
+                        <div class="field">
+                            <label for="reg-password">Password</label>
+                            <div class="input-wrap">
+                                <svg class="input-icon" viewBox="0 0 20 20" fill="none">
+                                    <rect x="4" y="9" width="12" height="9" rx="2" stroke="currentColor"
+                                        stroke-width="1.5" />
+                                    <path d="M7 9V6a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                </svg>
+                                <input type="password" id="reg-password" placeholder="min 6 characters" required
+                                    minlength="6">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-cta">
+                            <span>Create account</span>
+                            <svg viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+
+                        <p class="switch-text">Have an account? <a href="#" id="show-login">Sign in</a></p>
+                    </form>
+
+                    <div id="auth-message" class="message hidden"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="hidden">
+
+            <aside class="sidebar">
+                <div class="sidebar-top">
+                    <div class="sidebar-brand">
+                        <svg width="28" height="28" viewBox="0 0 30 30" fill="none">
+                            <rect width="30" height="30" rx="8" fill="url(#lg2)" />
+                            <path d="M7 15h3l2-6 3 11 2-7 2 4h4" stroke="white" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <defs>
+                                <linearGradient id="lg2" x1="0" y1="0" x2="30" y2="30">
+                                    <stop offset="0%" stop-color="#7c6af7" />
+                                    <stop offset="100%" stop-color="#a78bfa" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>Campus Gym Scheduler</span>
+                    </div>
+
+                    <nav class="sidebar-nav">
+                        <button class="nav-item active" data-tab="trainers">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8" />
+                                <path d="M4 20c0-4 3.582-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <span>Trainers</span>
+                        </button>
+                        <button class="nav-item" data-tab="students">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L2 8l10 5 10-5-10-5z" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linejoin="round" />
+                                <path d="M2 12l10 5 10-5M2 16l10 5 10-5" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <span>Students</span>
+                        </button>
+                        <button class="nav-item" data-tab="workouts">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M6 12h2M16 12h2M8 12V8M16 12V8M4 12H2M22 12h-2M8 8h8" stroke="currentColor"
+                                    stroke-width="1.8" stroke-linecap="round" />
+                                <rect x="8" y="14" width="8" height="4" rx="1" stroke="currentColor"
+                                    stroke-width="1.8" />
+                            </svg>
+                            <span>Workouts</span>
+                        </button>
+                        <button class="nav-item" data-tab="schedules">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="4" width="18" height="18" rx="3" stroke="currentColor"
+                                    stroke-width="1.8" />
+                                <path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" />
+                                <circle cx="8" cy="14" r="1" fill="currentColor" />
+                                <circle cx="12" cy="14" r="1" fill="currentColor" />
+                                <circle cx="16" cy="14" r="1" fill="currentColor" />
+                            </svg>
+                            <span>Schedules</span>
+                        </button>
+                        <button class="nav-item" data-tab="progress">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 18V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                                <path d="M8 18v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                                <path d="M12 18V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                                <path d="M16 18v-11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                                <path d="M20 18v-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                            </svg>
+                            <span>Progress</span>
+                        </button>
+                        <button class="nav-item" data-tab="profile">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8" />
+                                <path d="M4 21c0-4.1 3.6-7 8-7s8 2.9 8 7" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <span>Profile</span>
+                        </button>
+                        <button class="nav-item" data-tab="coming-soon-1">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M7 7h10M7 12h10M7 17h6" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" />
+                                <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor"
+                                    stroke-width="1.8" />
+                            </svg>
+                            <span>Attendance</span>
+                        </button>
+                        <button class="nav-item" data-tab="coming-soon-2">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M6 7h12M6 17h12" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" />
+                                <path d="M7 11h10v6H7z" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linejoin="round" />
+                                <path d="M9 11V9a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <span>Payments</span>
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="sidebar-bottom">
+                    <div class="user-chip">
+                        <div class="user-avatar" id="user-avatar-text">U</div>
+                        <div class="user-info">
+                            <span id="nav-username" class="user-name">User</span>
+                            <span class="user-role-badge" id="user-role-badge">—</span>
+                        </div>
+                    </div>
+                    <button id="logout-btn" class="logout-btn" title="Logout">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <div id="overview-panel" style="margin-bottom:18px;">
+                    <div class="page-header" style="margin-bottom:12px;">
+                        <div>
+                            <div class="page-eyebrow">Quick Insights</div>
+                            <h2 class="page-title" style="font-size:20px;">Dashboard Overview</h2>
+                        </div>
+                    </div>
+                    <div id="insight-cards" class="cards-grid"></div>
+                    <div class="card" style="margin-top:12px;">
+                        <div class="card-title">Today's Sessions</div>
+                        <div class="card-body" id="today-schedule"></div>
+                    </div>
+                </div>
+
+                <!-- TRAINERS TAB -->
+                <div id="trainers-tab" class="tab-content active">
+                    <div class="page-header">
+                        <div>
+                            <div class="page-eyebrow">Management</div>
+                            <h1 class="page-title">Trainers</h1>
+                        </div>
+                        <button class="btn-add" id="show-trainer-form-btn">
+                            <svg viewBox="0 0 20 20" fill="none">
+                                <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            Add Trainer
+                        </button>
+                    </div>
+                    <div id="trainer-form-container" class="drawer hidden">
+                        <div class="drawer-header">
+                            <h3 id="trainer-form-title">New Trainer</h3>
+                            <button type="button" class="drawer-close" id="cancel-trainer">
+                                <svg viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </button>
+                        </div>
+                        <form id="trainer-form" class="drawer-form">
+                            <input type="hidden" id="trainer-id">
+                            <div class="field-row">
+                                <div class="field">
+                                    <label for="trainer-name">Full Name</label>
+                                    <input type="text" id="trainer-name" placeholder="Alex Johnson" required>
+                                </div>
+                                <div class="field">
+                                    <label for="trainer-email">Email</label>
+                                    <input type="email" id="trainer-email" placeholder="alex@Campus Gym Scheduler.com"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="field-row">
+                                <div class="field">
+                                    <label for="trainer-specialization">Specialization</label>
+                                    <input type="text" id="trainer-specialization"
+                                        placeholder="e.g. Strength & Conditioning" required>
+                                </div>
+                                <div class="field">
+                                    <label for="trainer-experience">Experience (yrs)</label>
+                                    <input type="number" id="trainer-experience" placeholder="5" min="0" required>
+                                </div>
+                            </div>
+                            <div class="drawer-actions">
+                                <button type="submit" class="btn-save">Save Trainer</button>
+                                <button type="button" class="btn-ghost" id="cancel-trainer-2">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="trainers-list" class="cards-grid"></div>
+                </div>
+
+                <!-- STUDENTS TAB -->
+                <div id="students-tab" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <div class="page-eyebrow">Management</div>
+                            <h1 class="page-title">Students</h1>
+                        </div>
+                        <button class="btn-add" id="show-student-form-btn">
+                            <svg viewBox="0 0 20 20" fill="none">
+                                <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            Add Student
+                        </button>
+                    </div>
+                    <div id="student-form-container" class="drawer hidden">
+                        <div class="drawer-header">
+                            <h3 id="student-form-title">New Student</h3>
+                            <button type="button" class="drawer-close" id="cancel-student">
+                                <svg viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </button>
+                        </div>
+                        <form id="student-form" class="drawer-form">
+                            <input type="hidden" id="student-id">
+                            <div class="field-row">
+                                <div class="field">
+                                    <label for="student-name">Full Name</label>
+                                    <input type="text" id="student-name" placeholder="Jamie Lee" required>
+                                </div>
+                                <div class="field">
+                                    <label for="student-age">Age</label>
+                                    <input type="number" id="student-age" placeholder="22" min="10" max="100" required>
+                                </div>
+                            </div>
+                            <div class="field-row">
+                                <div class="field">
+                                    <label for="student-goal">Fitness Goal</label>
+                                    <select id="student-goal" required>
+                                        <option value="">-- Select a trainer first --</option>
+                                    </select>
+                                    <span class="field-hint" id="student-goal-hint"></span>
+                                </div>
+                                <div class="field">
+                                    <label for="student-trainer">Assign Trainer</label>
+                                    <select id="student-trainer">
+                                        <option value="">-- No Trainer --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="drawer-actions">
+                                <button type="submit" class="btn-save">Save Student</button>
+                                <button type="button" class="btn-ghost" id="cancel-student-2">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="students-list" class="cards-grid"></div>
+                </div>
+
+                <!-- WORKOUTS TAB -->
+                <div id="workouts-tab" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <div class="page-eyebrow">Plans</div>
+                            <h1 class="page-title">Workouts</h1>
+                        </div>
+                        <button class="btn-add" id="show-workout-form-btn">
+                            <svg viewBox="0 0 20 20" fill="none">
+                                <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            Create Plan
+                        </button>
+                    </div>
+                    <div id="workout-form-container" class="drawer hidden">
+                        <div class="drawer-header">
+                            <h3 id="workout-form-title">New Workout Plan</h3>
+                            <button type="button" class="drawer-close" id="cancel-workout">
+                                <svg viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </button>
+                        </div>
+                        <form id="workout-form" class="drawer-form">
+                            <input type="hidden" id="workout-id">
+                            <div class="field-row">
+                                <div class="field">
+                                    <label for="workout-title">Plan Title</label>
+                                    <input type="text" id="workout-title" placeholder="Beginner Push Day" required>
+                                </div>
+                                <div class="field">
+                                    <label for="workout-duration">Duration (min)</label>
+                                    <input type="number" id="workout-duration" placeholder="45" min="1" required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="workout-trainer">Trainer</label>
+                                <select id="workout-trainer" required>
+                                    <option value="">-- Select Trainer --</option>
+                                </select>
+                            </div>
+                            <div class="exercises-block">
+                                <div class="exercises-block-header">
+                                    <span>Exercises</span>
+                                    <button type="button" class="btn-add-ex" id="add-exercise-btn">+ Add</button>
+                                </div>
+                                <div id="exercises-list"></div>
+                            </div>
+                            <div class="drawer-actions">
+                                <button type="submit" class="btn-save">Save Plan</button>
+                                <button type="button" class="btn-ghost" id="cancel-workout-2">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="workouts-list" class="cards-grid"></div>
+                </div>
+
+                <!-- SCHEDULES TAB -->
+                <div id="schedules-tab" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <div class="page-eyebrow">Availability</div>
+                            <h1 class="page-title">Schedules</h1>
+                        </div>
+                        <button class="btn-add" id="show-schedule-form-btn">
+                            <svg viewBox="0 0 20 20" fill="none">
+                                <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            Add Slot
+                        </button>
+                    </div>
+                    <div id="schedule-form-container" class="drawer hidden">
+                        <div class="drawer-header">
+                            <h3>New Availability Slot</h3>
+                            <button type="button" class="drawer-close" id="cancel-schedule">
+                                <svg viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </button>
+                        </div>
+                        <form id="schedule-form" class="drawer-form">
+                            <div class="field-row">
+                                <div class="field">
+                                    <label for="schedule-trainer">Trainer</label>
+                                    <select id="schedule-trainer" required>
+                                        <option value="">-- Select Trainer --</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="schedule-date">Date</label>
+                                    <input type="date" id="schedule-date" required>
+                                </div>
+                                <div class="field">
+                                    <label for="schedule-time">Time</label>
+                                    <input type="time" id="schedule-time" required>
+                                </div>
+                            </div>
+                            <div class="drawer-actions">
+                                <button type="submit" class="btn-save">Add Slot</button>
+                                <button type="button" class="btn-ghost" id="cancel-schedule-2">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="schedules-list" class="cards-grid"></div>
+                </div>
+
+                <!-- PROGRESS TAB -->
+                <div id="progress-tab" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <div class="page-eyebrow">Tracking</div>
+                            <h1 class="page-title">Progress</h1>
+                        </div>
+                        <button class="btn-add" id="show-progress-form-btn">
+                            <svg viewBox="0 0 20 20" fill="none">
+                                <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            Add Entry
+                        </button>
+                    </div>
+
+                    <div id="progress-form-container" class="drawer hidden">
+                        <div class="drawer-header">
+                            <h3>New Progress Entry</h3>
+                            <button type="button" class="drawer-close" id="cancel-progress">
+                                <svg viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </button>
+                        </div>
+                        <form id="progress-form" class="drawer-form">
+                            <div class="field-row">
+                                <div class="field">
+                                    <label for="progress-date">Date</label>
+                                    <input type="date" id="progress-date" required>
+                                </div>
+                                <div class="field">
+                                    <label for="progress-weight">Weight (kg)</label>
+                                    <input type="number" id="progress-weight" placeholder="e.g. 68" min="1" step="0.1">
+                                </div>
+                            </div>
+                            <div class="field-row">
+                                <div class="field">
+                                    <label for="progress-minutes">Workout Minutes</label>
+                                    <input type="number" id="progress-minutes" placeholder="e.g. 45" min="0">
+                                </div>
+                                <div class="field">
+                                    <label for="progress-notes">Notes</label>
+                                    <input type="text" id="progress-notes" placeholder="How did it feel?">
+                                </div>
+                            </div>
+
+                            <div class="exercises-block">
+                                <div class="exercises-block-header">
+                                    <span>Exercises</span>
+                                    <button type="button" class="btn-add-ex" id="add-progress-exercise-btn">+
+                                        Add</button>
+                                </div>
+                                <div id="progress-exercises-list"></div>
+                            </div>
+
+                            <div class="drawer-actions">
+                                <button type="submit" class="btn-save">Save Entry</button>
+                                <button type="button" class="btn-ghost" id="cancel-progress-2">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+
+                    <div class="page-header" style="margin-top:10px;">
+                        <div>
+                            <div class="page-eyebrow" id="progress-list-title">Entries</div>
+                            <h2 class="page-title" style="font-size:20px;">Progress Entries</h2>
+                        </div>
+                    </div>
+                    <div id="progress-list" class="cards-grid"></div>
+                </div>
+
+                <!-- COMING SOON 1 -->
+                <div id="coming-soon-1-tab" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <div class="page-eyebrow">Feature</div>
+                            <h1 class="page-title">Attendance</h1>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Coming Soon</div>
+                        <div class="card-body">
+                            <p>Attendance tracking, QR check-in, and monthly reports will appear here.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMING SOON 2 -->
+                <div id="coming-soon-2-tab" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <div class="page-eyebrow">Feature</div>
+                            <h1 class="page-title">Payments</h1>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Coming Soon</div>
+                        <div class="card-body">
+                            <p>Membership plans, invoices, and payment history will be available here.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROFILE TAB -->
+                <div id="profile-tab" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <div class="page-eyebrow">Account</div>
+                            <h1 class="page-title">Profile</h1>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">My Details</div>
+                        <div class="card-body" id="my-profile-details"></div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">Change Password</div>
+                        <form id="change-password-form" class="drawer-form" style="padding:0;margin-top:10px;">
+                            <div class="field-row">
+                                <div class="field">
+                                    <label for="cp-current">Current Password</label>
+                                    <div class="input-wrap">
+                                        <input type="password" id="cp-current" placeholder="current password" required>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label for="cp-new">New Password</label>
+                                    <div class="input-wrap">
+                                        <input type="password" id="cp-new" placeholder="min 6 characters" required
+                                            minlength="6">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="drawer-actions">
+                                <button type="submit" class="btn-save">Update Password</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="admin-user-manager" class="card hidden">
+                        <div class="page-header" style="margin-top:10px;">
+                            <div>
+                                <div class="page-eyebrow">Admin</div>
+                                <h2 class="page-title" style="font-size:20px;">Manage Users</h2>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-title">Select User</div>
+                            <div class="card-body">
+                                <div class="field">
+                                    <label for="admin-user-select">User (username)</label>
+                                    <select id="admin-user-select">
+                                        <option value="">-- Select --</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-title">Edit Details</div>
+                            <form id="admin-user-edit-form" class="drawer-form" style="padding:0;margin-top:10px;">
+                                <input type="hidden" id="admin-user-id">
+                                <div class="field-row">
+                                    <div class="field">
+                                        <label for="admin-username">Username</label>
+                                        <input type="text" id="admin-username" placeholder="unique username" required
+                                            minlength="3">
+                                    </div>
+                                    <div class="field">
+                                        <label for="admin-email">Email</label>
+                                        <input type="email" id="admin-email" placeholder="user@email.com" required>
+                                    </div>
+                                </div>
+                                <div class="field-row">
+                                    <div class="field">
+                                        <label for="admin-role">Role</label>
+                                        <select id="admin-role" required>
+                                            <option value="student">Student</option>
+                                            <option value="trainer">Trainer</option>
+                                            <option value="admin">Admin</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label for="admin-reset-password">Reset Password</label>
+                                        <div class="input-wrap">
+                                            <input type="password" id="admin-reset-password" placeholder="new password">
+                                        </div>
+                                        <span class="field-hint">Optional: enter a new password to reset.</span>
+                                    </div>
+                                </div>
+                                <div class="drawer-actions">
+                                    <button type="submit" class="btn-save">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+            <div id="toast" class="toast hidden"></div>
+
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
